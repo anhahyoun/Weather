@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.idus.ui.model.WeatherInformation" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,6 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingHorizontal="2dp"
+            android:text="@{item.location}"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +65,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
+            android:text="@{item.tomorrow.weather}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/tv_tomorrow_temperature"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="10dp"
+            android:text="@{@string/temperature(item.tomorrow.temperature)}"
             android:textColor="@color/red"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -85,6 +95,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="10dp"
+            android:text="@{@string/humidity(item.tomorrow.humidity)}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -121,6 +132,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
+            android:text="@{item.today.weather}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/tv_temperature"
             app:layout_constraintEnd_toEndOf="@id/v_division_line3"
@@ -135,6 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="10dp"
+            android:text="@{@string/temperature(item.today.temperature)}"
             android:textColor="@color/red"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -149,6 +162,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="10dp"
+            android:text="@{@string/humidity(item.today.humidity)}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

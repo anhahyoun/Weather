@@ -20,8 +20,9 @@ class WeatherAdapter : ListAdapter<WeatherInformation, WeatherAdapter.ViewHolder
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WeatherInformation) {
+            binding.item = item
         }
     }
 

@@ -5,4 +5,6 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="today">Today</string>
     <string name="weather_icon">weather icon</string>
+    <string name="temperature">%d°C</string>
+    <string name="humidity">%d%%</string>
 </resources>

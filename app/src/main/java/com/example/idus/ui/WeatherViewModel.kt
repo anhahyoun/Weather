@@ -35,7 +35,7 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
                         val today = weatherResult[0].run {
                             WeatherItem(
                                 "https://www.metaweather.com/static/img/weather/${weatherStateAbbr}.svg",
-                                temperature,
+                                temperature.toInt(),
                                 humidity,
                                 weatherStateName
                             )
@@ -43,7 +43,7 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
                         val tomorrow = weatherResult[1].run {
                             WeatherItem(
                                 "https://www.metaweather.com/static/img/weather/${weatherStateAbbr}.svg",
-                                temperature,
+                                temperature.toInt(),
                                 humidity,
                                 weatherStateName
                             )
