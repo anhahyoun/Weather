@@ -19,6 +19,7 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initView()
         setupObserve()
+        // TODO loading page, refresh
     }
 
     private fun initView() {

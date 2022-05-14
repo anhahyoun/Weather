@@ -49,6 +49,7 @@
 
         <ImageView
             android:id="@+id/iv_tomorrow"
+            setUrlImage="@{item.tomorrow.iconUrl}"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -116,6 +117,7 @@
 
         <ImageView
             android:id="@+id/iv_today"
+            setUrlImage="@{item.today.iconUrl}"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"

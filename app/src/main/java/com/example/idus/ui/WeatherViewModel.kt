@@ -34,7 +34,7 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
                         val weatherResult = getWeather(it.woeid).consolidated_weather
                         val today = weatherResult[0].run {
                             WeatherItem(
-                                "https://www.metaweather.com/static/img/weather/${weatherStateAbbr}.svg",
+                                "https://www.metaweather.com/static/img/weather/png/64/${weatherStateAbbr}.png",
                                 temperature.toInt(),
                                 humidity,
                                 weatherStateName
@@ -42,7 +42,7 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
                         }
                         val tomorrow = weatherResult[1].run {
                             WeatherItem(
-                                "https://www.metaweather.com/static/img/weather/${weatherStateAbbr}.svg",
+                                "https://www.metaweather.com/static/img/weather/png/64/${weatherStateAbbr}.png",
                                 temperature.toInt(),
                                 humidity,
                                 weatherStateName
