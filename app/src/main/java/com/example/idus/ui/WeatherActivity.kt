@@ -13,6 +13,7 @@ class WeatherActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWeatherBinding
     private val viewModel: WeatherViewModel by viewModels()
+    private lateinit var adapter: WeatherAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +24,13 @@ class WeatherActivity : AppCompatActivity() {
     private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         binding.lifecycleOwner = this
+        adapter = WeatherAdapter()
+        binding.rvWeather.adapter = adapter
     }
 
     private fun setupObserve() {
         viewModel.weatherInformation.observe(this) {
-
+            adapter.submitList(it)
         }
     }
 }
