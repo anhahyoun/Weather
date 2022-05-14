@@ -7,4 +7,5 @@
     <string name="weather_icon">weather icon</string>
     <string name="temperature">%d°C</string>
     <string name="humidity">%d%%</string>
+    <string name="error_msg">오류가 발생했습니다.</string>
 </resources>

@@ -1,12 +1,15 @@
 package com.example.idus.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.example.idus.R
 import com.example.idus.databinding.ActivityWeatherBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class WeatherActivity : AppCompatActivity() {
@@ -19,7 +22,8 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initView()
         setupObserve()
-        // TODO loading page, refresh
+        setupListener()
+        // TODO loading page
     }
 
     private fun initView() {
@@ -32,6 +36,18 @@ class WeatherActivity : AppCompatActivity() {
     private fun setupObserve() {
         viewModel.weatherInformation.observe(this) {
             adapter.submitList(it)
+            binding.srWeather.isRefreshing = false
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.isError.collect {
+                Toast.makeText(applicationContext, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupListener() {
+        binding.srWeather.setOnRefreshListener {
+            viewModel.getLocation("se")
         }
     }
 }

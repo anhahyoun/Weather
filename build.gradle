@@ -12,6 +12,7 @@ ext {
     lifecycle_version = "2.4.1"
     android_ktx_version = "1.4.0"
     glide_version = "4.13.0"
+    swiperefresh_version = "1.1.0"
 }
 
 task clean(type: Delete) {

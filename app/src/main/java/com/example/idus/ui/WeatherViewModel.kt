@@ -1,6 +1,5 @@
 package com.example.idus.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,10 @@ import com.example.idus.ui.model.WeatherItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,11 +23,14 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
     private val _weatherInformation = MutableLiveData<List<WeatherInformation>>()
     val weatherInformation: LiveData<List<WeatherInformation>> = _weatherInformation
 
+    private val _isError = MutableSharedFlow<Boolean>()
+    val isError = _isError.asSharedFlow()
+
     init {
         getLocation("se")
     }
 
-    private fun getLocation(query: String) {
+    fun getLocation(query: String) {
         viewModelScope.launch {
             val result = repository.getLocations(query)
             result.mapCatching {
@@ -53,8 +58,7 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
                 }.awaitAll()
                 _weatherInformation.postValue(data)
             }.onFailure {
-                // TODO
-                Log.e("failure", it.toString())
+                _isError.emit(true)
             }
         }
     }
