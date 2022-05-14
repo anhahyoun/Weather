@@ -17,10 +17,17 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+        setupObserve()
     }
 
     private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         binding.lifecycleOwner = this
+    }
+
+    private fun setupObserve() {
+        viewModel.weatherInformation.observe(this) {
+
+        }
     }
 }
