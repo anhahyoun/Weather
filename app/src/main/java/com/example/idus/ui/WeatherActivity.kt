@@ -23,12 +23,12 @@ class WeatherActivity : AppCompatActivity() {
         initView()
         setupObserve()
         setupListener()
-        // TODO loading page
     }
 
     private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         adapter = WeatherAdapter()
         binding.rvWeather.adapter = adapter
     }
@@ -38,6 +38,7 @@ class WeatherActivity : AppCompatActivity() {
             adapter.submitList(it)
             binding.srWeather.isRefreshing = false
         }
+
         lifecycleScope.launchWhenStarted {
             viewModel.isError.collect {
                 Toast.makeText(applicationContext, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
@@ -47,7 +48,7 @@ class WeatherActivity : AppCompatActivity() {
 
     private fun setupListener() {
         binding.srWeather.setOnRefreshListener {
-            viewModel.getLocation("se")
+            viewModel.getLocation("se", true)
         }
     }
 }

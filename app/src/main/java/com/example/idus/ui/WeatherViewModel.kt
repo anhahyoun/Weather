@@ -14,7 +14,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,11 +25,19 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
     private val _isError = MutableSharedFlow<Boolean>()
     val isError = _isError.asSharedFlow()
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _showLoading = MutableLiveData<Boolean>()
+    val showLoading: LiveData<Boolean> = _showLoading
+
     init {
-        getLocation("se")
+        getLocation("se", false)
     }
 
-    fun getLocation(query: String) {
+    fun getLocation(query: String, isRefresh: Boolean) {
+        _isLoading.postValue(true)
+        _showLoading.postValue(!isRefresh)
         viewModelScope.launch {
             val result = repository.getLocations(query)
             result.mapCatching {
@@ -60,6 +67,8 @@ class WeatherViewModel @Inject constructor(private val repository: Repository) :
             }.onFailure {
                 _isError.emit(true)
             }
+            _isLoading.postValue(false)
+            _showLoading.postValue(false)
         }
     }
 
